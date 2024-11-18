@@ -1,4 +1,4 @@
-﻿
+// Check boxes in student attendance trackers﻿
 $('#Select_All').on('click', function () {
     let checkboxes = document.getElementsByTagName('input');
     let val = null;
