@@ -147,6 +147,7 @@ $('#Lit_UpdateBtn').on('click', function () {
 
 });
 
+// Used to switch between classes in attendance tracking
 $('#Select').on('change', function () {
     var data = $(this).children("option:selected").text();
     switch (data) {
