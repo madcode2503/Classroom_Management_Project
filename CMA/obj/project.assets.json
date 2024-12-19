@@ -8132,11 +8132,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\OS\\OneDrive\\Desktop\\CMA_Project\\CMA\\CMA.csproj",
+      "projectUniqueName": "C:\\Users\\OS\\OneDrive\\Desktop\\Assignment-Group_8\\Classroom_Management_Project\\CMA\\CMA.csproj",
       "projectName": "CMA",
-      "projectPath": "C:\\Users\\OS\\OneDrive\\Desktop\\CMA_Project\\CMA\\CMA.csproj",
+      "projectPath": "C:\\Users\\OS\\OneDrive\\Desktop\\Assignment-Group_8\\Classroom_Management_Project\\CMA\\CMA.csproj",
       "packagesPath": "C:\\Users\\OS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\OS\\OneDrive\\Desktop\\CMA_Project\\CMA\\obj\\",
+      "outputPath": "C:\\Users\\OS\\OneDrive\\Desktop\\Assignment-Group_8\\Classroom_Management_Project\\CMA\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

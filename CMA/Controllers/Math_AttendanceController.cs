@@ -25,7 +25,19 @@ namespace CMA.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var data_set = await _context.math_Attendance.FromSql($"Select * from math_Attendance Order By FirstName ASC ").ToListAsync();
+            var data_set = await _context.math_Attendance
+                .ToListAsync();
+            foreach(var pp in data_set)
+            {
+                pp.Percentage = 100 - (((float)pp.Lectures_Absent /(float) pp.Total_lectures) * 100);
+               
+               //_context.math_Attendance.Where(x => x.Percentage < 80)
+               //.ExecuteUpdate(x => x.SetProperty(p => p.Remarks, "Admission Allowed"));
+               // _context.math_Attendance.Where(y => y.Percentage > 80)
+               //   .ExecuteUpdate(x => x.SetProperty(p => p.Remarks, "Admission Rejected"));
+               // await _context.SaveChangesAsync();
+            }
+            
             return View(data_set);
         }
         /*
@@ -52,12 +64,13 @@ namespace CMA.Controllers
                         if (data != null)
                         {
                             data.Lectures_Absent++;
-                            data.Percentage = 100 - (((float)data.Lectures_Absent / 25) * 100);
+                            data.Percentage = 100 - (((float)data.Lectures_Absent / data.Total_lectures) * 100);
                             attend.Math_Attendance = data.Percentage;
                             if (data.Percentage < 80)
                             {
                                 data.Remarks = "Admission Rejected";
                                 gradebook.Remarks = "Admission Rejected";
+                                gradebook.Mathematics = 0;
                                 attend.Remarks = "Admission Rejected";
                             }
                         }
@@ -73,7 +86,26 @@ namespace CMA.Controllers
             };
             return new JsonResult(result);
         }
-       
+        public IActionResult Edit_Num_Lectures()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit_Num_Lectures([Bind("Total_lectures")] Math_Attendance m_a)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _context.math_Attendance.Where(x => x.Total_lectures==0 || x.Total_lectures!=0)
+                    .ExecuteUpdate(x => x.SetProperty(p => p.Total_lectures, m_a.Total_lectures));
+                
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(m_a);
+        }
         private bool Math_AttendanceExists(int id)
         {
             return _context.math_Attendance.Any(e => e.Id == id);

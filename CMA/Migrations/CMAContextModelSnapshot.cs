@@ -17,7 +17,7 @@ namespace CMA.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -156,6 +156,9 @@ namespace CMA.Migrations
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Total_lectures")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("biology_Attendance");
@@ -183,6 +186,9 @@ namespace CMA.Migrations
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Total_lectures")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -252,6 +258,9 @@ namespace CMA.Migrations
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Total_lectures")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("history_Attendance");
@@ -279,6 +288,9 @@ namespace CMA.Migrations
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Total_lectures")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -308,6 +320,9 @@ namespace CMA.Migrations
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Total_lectures")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("math_Attendance");
@@ -335,6 +350,9 @@ namespace CMA.Migrations
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Total_lectures")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -551,6 +569,56 @@ namespace CMA.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "960b06b5-c864-4cc5-b34f-0ac97a570e79",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "27bd8cae-50bc-4904-9965-1eacc4da4f52",
+                            Name = "Math Teacher",
+                            NormalizedName = "Math Teacher"
+                        },
+                        new
+                        {
+                            Id = "a8874a5c-0115-42ad-93d9-199a5f883d0b",
+                            Name = "Physics Teacher",
+                            NormalizedName = "Physics Teacher"
+                        },
+                        new
+                        {
+                            Id = "c66adb85-83b2-4674-8a3f-f48808e20198",
+                            Name = "Chemistry Teacher",
+                            NormalizedName = "Chemistry Teacher"
+                        },
+                        new
+                        {
+                            Id = "d93bdba9-7653-4e19-864b-8970b4273dba",
+                            Name = "Biology Teacher",
+                            NormalizedName = "Biology Teacher"
+                        },
+                        new
+                        {
+                            Id = "6bd937ec-7be3-4da3-8cae-ecf8eb755012",
+                            Name = "History Teacher",
+                            NormalizedName = "History Teacher"
+                        },
+                        new
+                        {
+                            Id = "7bd95037-126c-46a2-9899-908ce97a4188",
+                            Name = "Literature Teacher",
+                            NormalizedName = "Literature Teacher"
+                        },
+                        new
+                        {
+                            Id = "c1d5e84e-4fd9-4e51-86a4-62f6f2c1da20",
+                            Name = "User",
+                            NormalizedName = "User"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

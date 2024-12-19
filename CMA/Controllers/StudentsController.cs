@@ -26,8 +26,9 @@ namespace CMA.Controllers
         {
             return View(await _context.Students.ToListAsync());
         }
-        // Display students list with full of CRUD operations, only logged in users can access
-        [Authorize]
+        
+        [Authorize] 
+        //Students list
         public async Task<IActionResult> Index2()
         {
             return View(await _context.Students.ToListAsync());
@@ -51,14 +52,13 @@ namespace CMA.Controllers
         }
 
         // GET: Students/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Students/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Student student,Student_Backup student_Backup,Grade_Book grade_Book,
@@ -109,6 +109,7 @@ namespace CMA.Controllers
         }
 
         // GET: Students/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -124,9 +125,7 @@ namespace CMA.Controllers
             return View(student);
         }
 
-        // POST: Students/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,Student student,Student_Backup student_Backup)
@@ -166,6 +165,7 @@ namespace CMA.Controllers
         }
 
         // GET: Students/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

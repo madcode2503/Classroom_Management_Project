@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CMA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9cc27411bb793521f210afc3ae9462e0606494e")]
 [assembly: System.Reflection.AssemblyProductAttribute("CMA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CMA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -13,6 +13,6 @@ namespace CMA.Models
         public int Lectures_Absent { get; set; }
         public float Percentage { get; set; }
         public string? Remarks { get; set; }
-
+        public int Total_lectures { get; set; }
     }
 }

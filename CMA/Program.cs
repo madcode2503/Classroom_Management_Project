@@ -9,12 +9,17 @@ namespace CMA
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("CMAContextConnection") ?? throw new InvalidOperationException("Connection string 'CMAContextConnection' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("CMAContextConnection")
+                ?? throw new InvalidOperationException("Connection string 'CMAContextConnection' not found.");
 
             builder.Services.AddDbContext<CMAContext>(options => options.UseSqlServer(connectionString));
 
-            builder.Services.AddDefaultIdentity<CMAUsers>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<CMAContext>();
+            builder.Services.AddDefaultIdentity<CMAUsers>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<CMAContext>();
+
             builder.Services.AddRazorPages();
+
             //Configure authentication (password)
             builder.Services.Configure<IdentityOptions>(options =>
             {
@@ -29,7 +34,7 @@ namespace CMA
                 options.SignIn.RequireConfirmedPhoneNumber = false;
                 options.SignIn.RequireConfirmedEmail = false;
             });
-            // Add session
+            // Add session to the website
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(60);

@@ -56,6 +56,7 @@ namespace CMA.Controllers
                             {
                                 data.Remarks = "Admission Rejected";
                                 gradebook.Remarks = "Admission Rejected";
+                                gradebook.Literature = 0;
                                 attend.Remarks = "Admission Rejected";
                             }
                         }
@@ -71,7 +72,26 @@ namespace CMA.Controllers
             };
             return new JsonResult(result);
         }
-       
+        public IActionResult Edit_Num_Lectures()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit_Num_Lectures([Bind("Total_lectures")] Literature_Attendance m_a)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _context.lit_Attendance.Where(x => x.Total_lectures == 0 || x.Total_lectures != 0)
+                    .ExecuteUpdate(x => x.SetProperty(p => p.Total_lectures, m_a.Total_lectures));
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(m_a);
+        }
 
         private bool Literature_AttendanceExists(int id)
         {

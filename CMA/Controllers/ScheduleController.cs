@@ -21,12 +21,14 @@ namespace CMA.Controllers
         }
 
         // GET: Schedules
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.schedule.ToListAsync());
+            return View(await _context.schedule
+                .ToListAsync());
         }
 
-        [Authorize]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Index2()
         {
             return View(await _context.schedule.ToListAsync());

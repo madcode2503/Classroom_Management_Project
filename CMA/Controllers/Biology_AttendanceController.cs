@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CMA.Context;
 using CMA.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading;
 
 namespace CMA.Controllers
 {
@@ -51,12 +52,13 @@ namespace CMA.Controllers
                         if (data != null)
                         {
                             data.Lectures_Absent++;
-                            data.Percentage = 100 - (((float)data.Lectures_Absent / 25) * 100);
+                            data.Percentage = 100 - (((float)data.Lectures_Absent / data.Total_lectures) * 100);
                             attend.Biology_Attendance=data.Percentage;
                             if (data.Percentage < 80)
                             {
                                 data.Remarks = "Admission Rejected";
                                 gradebook.Remarks = "Admission Rejected";
+                                gradebook.Biology = 0;
                                 attend.Remarks = "Admission Rejected";
                             }
                         }
@@ -73,7 +75,25 @@ namespace CMA.Controllers
             };
             return new JsonResult(result);
         }
+        public IActionResult Edit_Num_Lectures()
+        {
+           
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit_Num_Lectures([Bind("Total_lectures")] Biology_Attendance b_a)
+        {
 
+            if (ModelState.IsValid)
+            {
+                _context.biology_Attendance.Where(x=>x.Total_lectures==0)
+                    .ExecuteUpdate(x => x.SetProperty(p => p.Total_lectures,b_a.Total_lectures));
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(b_a);
+        }
         private bool Biology_AttendanceExists(int id)
         {
             return _context.biology_Attendance.Any(e => e.Id == id);

@@ -21,7 +21,7 @@ namespace CMA.Controllers
         }
 
         // GET: Teachers
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index2()
         {
 
@@ -53,9 +53,6 @@ namespace CMA.Controllers
             return View();
         }
 
-        // POST: Teachers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Teacher teacher,Teacher_Backup teacher_Backup)
